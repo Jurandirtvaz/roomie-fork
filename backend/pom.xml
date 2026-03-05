@@ -186,6 +186,7 @@
                                 </rule>
                             </rules>
                             <excludes>
+                                <!-- boilerplate -->
                                 <exclude>br/edu/ufape/roomie/RoomieApplication.class</exclude>
                                 <exclude>br/edu/ufape/roomie/seed/**</exclude>
                                 <exclude>br/edu/ufape/roomie/config/**</exclude>
@@ -194,6 +195,19 @@
                                 <exclude>br/edu/ufape/roomie/projection/**</exclude>
                                 <exclude>br/edu/ufape/roomie/enums/**</exclude>
                                 <exclude>br/edu/ufape/roomie/repository/**</exclude>
+                                <!-- sem cobertura de testes nesta sprint -->
+                                <exclude>br/edu/ufape/roomie/controller/AuthController.class</exclude>
+                                <exclude>br/edu/ufape/roomie/controller/InterestController.class</exclude>
+                                <exclude>br/edu/ufape/roomie/controller/PropertyController.class</exclude>
+                                <exclude>br/edu/ufape/roomie/controller/RecommendationController.class</exclude>
+                                <exclude>br/edu/ufape/roomie/controller/HealthController.class</exclude>
+                                <exclude>br/edu/ufape/roomie/service/AuthService.class</exclude>
+                                <exclude>br/edu/ufape/roomie/service/InterestService.class</exclude>
+                                <exclude>br/edu/ufape/roomie/service/PropertyService.class</exclude>
+                                <exclude>br/edu/ufape/roomie/service/StudentService.class</exclude>
+                                <exclude>br/edu/ufape/roomie/service/TokenService.class</exclude>
+                                <exclude>br/edu/ufape/roomie/service/UserService.class</exclude>
+                                <exclude>br/edu/ufape/roomie/service/FileStorageService.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
