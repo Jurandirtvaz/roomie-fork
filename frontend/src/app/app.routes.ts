@@ -11,6 +11,7 @@ import {FavoritosComponent} from './pages/favoritos/favoritos.component';
 import {PropertyDetailPageComponent} from './pages/property-detail/property-detail-page.component';
 import {RecommendationsComponent} from './pages/recommendations/recommendations.component';
 import {HabitsComponent} from './pages/habits/habits.component';
+import {CandidatosDashboardComponent} from './pages/candidatos-dashboard/candidatos-dashboard';
 
 export const routes: Routes = [
   {
@@ -92,6 +93,12 @@ export const routes: Routes = [
     component: PropertyDetailPageComponent,
     canActivate: [authGuard],
     title: 'Detalhes do Imóvel - Roomie'
+  },
+  {
+    path: 'candidatos',
+    component: CandidatosDashboardComponent,
+    canActivate: [authGuard],
+    title: 'Gerenciamento de Candidatos - Roomie'
   },
   {
     path: '**',
