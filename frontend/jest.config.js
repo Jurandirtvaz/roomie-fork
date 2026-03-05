@@ -14,4 +14,21 @@ module.exports = {
     ],
   },
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
+  collectCoverageFrom: [
+    'src/app/**/*.ts',
+    '!src/app/**/*.spec.ts',
+    '!src/app/**/*.module.ts',
+    '!src/main.ts',
+    '!src/app/app.config.ts',
+    '!src/app/app.routes.ts',
+    '!src/enviroments/**',
+  ],
+  coverageThreshold: {
+    global: {
+      statements: 70,
+      branches: 80,
+      functions: 70,
+      lines: 70,
+    },
+  },
 };
