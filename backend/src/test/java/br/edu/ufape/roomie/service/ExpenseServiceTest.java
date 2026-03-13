@@ -14,6 +14,7 @@ import br.edu.ufape.roomie.repository.PropertyRepository;
 import br.edu.ufape.roomie.repository.StudentRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -117,7 +118,6 @@ class ExpenseServiceTest {
         when(contractRepository.existsByPropertyIdAndStudentIdAndStatusIn(10L, 1L, List.of(ContractStatus.ACTIVE))).thenReturn(true);
         when(expenseRepository.findByPropertyId(10L)).thenReturn(List.of(e1, e2));
 
-        // Simula 3 moradores na casa (150 / 3 = 50)
         when(contractRepository.findByPropertyIdAndStatus(10L, ContractStatus.ACTIVE)).thenReturn(List.of(new Contract(), new Contract(), new Contract()));
 
         ExpenseSummaryDTO result = expenseService.getExpensesByProperty(10L);
@@ -126,5 +126,26 @@ class ExpenseServiceTest {
         assertEquals(3, result.getNumberOfResidents());
         assertEquals(new BigDecimal("50.00"), result.getAmountPerResident());
         assertEquals(2, result.getExpenses().size());
+    }
+
+    @Test
+    @DisplayName("Deve retornar valor por morador igual a ZERO se não houver moradores ativos para dividir")
+    void shouldReturnZeroAmountPerResidentWhenNoActiveResidents() {
+        Expense e1 = new Expense();
+        e1.setId(1L);
+        e1.setAmount(new BigDecimal("100.00"));
+        e1.setRegisteredBy(mockStudent);
+        e1.setExpenseDate(LocalDate.now());
+
+        when(contractRepository.existsByPropertyIdAndStudentIdAndStatusIn(10L, 1L, List.of(ContractStatus.ACTIVE))).thenReturn(true);
+        when(expenseRepository.findByPropertyId(10L)).thenReturn(List.of(e1));
+
+        when(contractRepository.findByPropertyIdAndStatus(10L, ContractStatus.ACTIVE)).thenReturn(List.of());
+
+        ExpenseSummaryDTO result = expenseService.getExpensesByProperty(10L);
+
+        assertEquals(new BigDecimal("100.00"), result.getTotalAmount());
+        assertEquals(0, result.getNumberOfResidents());
+        assertEquals(BigDecimal.ZERO, result.getAmountPerResident());
     }
 }
